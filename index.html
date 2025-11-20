@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地域活動ビジョン診断テスト</title>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            background: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+        
+        .option input[type="radio"] {
+            display: none;
+        }
+        
+        .option label {
+            display: block;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .option input[type="radio"]:checked + label {
+            background: #3498db;
+            color: white;
+        }
+        
+        .option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+        
+        .calculate-btn {
+            display: block;
+            width: 250px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .result {
+            display: none;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .result-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .result-details {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .result-section {
+            margin-bottom: 15px;
+        }
+        
+        .result-section h4 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #fff;
+        }
+        
+        .result-section p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .option label {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">地域活動ビジョン診断テスト</h1>
+        <p class="subtitle">
+            あなたが本当に大切にしたい価値観と、<br>
+            目指したい地域活動のスタイルを見つけよう
+        </p>
+        
+        <div class="intro">
+            <p><strong>診断について：</strong>この診断は「どのパターンが正しい」かを判断するものではありません。あなたが心の奥底で大切にしている価値観と、目指したい地域活動の方向性を発見するためのツールです。</p>
+            <p>15の質問に答えて、あなたの地域活動における志向性を診断します。正直に答えることで、より明確な方向性が見えてきます。</p>
+            <p><strong>所要時間：</strong>約3分</p>
+        </div>
+
+        <div class="question">
+            <div class="question-text">1. 地域活動を始める時、最も重視することは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q1" value="impact" id="q1a">
+                    <label for="q1a">大きなインパクトを短期間で生み出すこと</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q1" value="admin" id="q1b">
+                    <label for="q1b">行政との連携で安定した基盤を築くこと</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q1" value="root" id="q1c">
+                    <label for="q1c">地域の人々との深い信頼関係を築くこと</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">2. 資金調達について、最も理想的だと思うのは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q2" value="impact" id="q2a">
+                    <label for="q2a">大型助成金を獲得して大規模に展開する</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q2" value="admin" id="q2b">
+                    <label for="q2b">行政予算で安定的に継続する</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q2" value="root" id="q2c">
+                    <label for="q2c">地域企業や住民の協賛で自立運営する</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">3. 活動の成果をどのように測りたいですか？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q3" value="impact" id="q3a">
+                    <label for="q3a">参加者数、満足度、メディア露出数</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q3" value="admin" id="q3b">
+                    <label for="q3b">継続年数、安定性、公平性</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q3" value="root" id="q3c">
+                    <label for="q3c">参加者の長期的変化、地域への根ざし具合</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">4. 理想的な活動の広がり方は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q4" value="impact" id="q4a">
+                    <label for="q4a">全国展開して多くの地域でモデル化される</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q4" value="admin" id="q4b">
+                    <label for="q4b">政策として採用され制度化される</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q4" value="root" id="q4c">
+                    <label for="q4c">この地域で深く根ざし、文化として定着する</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">5. 若者との関わり方で大切にしたいことは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q5" value="impact" id="q5a">
+                    <label for="q5a">多くの若者にプログラムを提供する</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q5" value="admin" id="q5b">
+                    <label for="q5b">公平で安全なプログラムを安定的に提供する</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q5" value="root" id="q5c">
+                    <label for="q5c">一人ひとりと長期的な関係を築く</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">6. 活動の継続において最も不安に感じることは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q6" value="impact" id="q6a">
+                    <label for="q6a">注目度が下がって資金調達が困難になること</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q6" value="admin" id="q6b">
+                    <label for="q6b">政策変更や予算削減の影響を受けること</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q6" value="root" id="q6c">
+                    <label for="q6c">地域の理解や協力が得られなくなること</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">7. 他地域の成功事例を知った時の反応は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q7" value="impact" id="q7a">
+                    <label for="q7a">すぐに参考にして自分の地域でも展開したい</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q7" value="admin" id="q7b">
+                    <label for="q7b">政策として採用できるか検討したい</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q7" value="root" id="q7c">
+                    <label for="q7c">自分の地域の特性に合うか慎重に考えたい</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">8. 地域企業との理想的な関係は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q8" value="impact" id="q8a">
+                    <label for="q8a">スポンサーとして資金提供してもらう</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q8" value="admin" id="q8b">
+                    <label for="q8b">行政の仲介で公平に連携する</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q8" value="root" id="q8c">
+                    <label for="q8c">一緒に地域を良くする仲間として協働する</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">9. 10年後の理想的な状況は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q9" value="impact" id="q9a">
+                    <label for="q9a">全国的に知られるモデル事業として認知される</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q9" value="admin" id="q9b">
+                    <label for="q9b">制度として確立され、安定運営されている</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q9" value="root" id="q9c">
+                    <label for="q9c">地域の文化として定着し、自然に継承されている</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">10. メディア取材の申し込みがあった時の反応は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q10" value="impact" id="q10a">
+                    <label for="q10a">積極的に受けて活動をアピールしたい</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q10" value="admin" id="q10b">
+                    <label for="q10b">行政と相談して適切に対応したい</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q10" value="root" id="q10c">
+                    <label for="q10c">参加者や地域への影響を考慮して慎重に判断したい</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">11. 新しいプログラムを企画する時の判断基準は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q11" value="impact" id="q11a">
+                    <label for="q11a">話題性があり、多くの人が注目するか</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q11" value="admin" id="q11b">
+                    <label for="q11b">政策に合致し、公的支援を得られるか</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q11" value="root" id="q11c">
+                    <label for="q11c">地域の本当のニーズに応えられるか</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">12. スタッフ・ボランティアとの関係で重視することは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q12" value="impact" id="q12a">
+                    <label for="q12a">効率的に成果を出せる体制作り</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q12" value="admin" id="q12b">
+                    <label for="q12b">公平で透明性のある運営体制</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q12" value="root" id="q12c">
+                    <label for="q12c">一人ひとりが成長できる環境作り</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">13. 予算が限られた時の優先順位は？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q13" value="impact" id="q13a">
+                    <label for="q13a">話題になりそうな目玉企画に集中投資</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q13" value="admin" id="q13b">
+                    <label for="q13b">基本的なサービスを公平に維持</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q13" value="root" id="q13c">
+                    <label for="q13c">参加者との関係維持を最優先</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">14. 活動の評価を受ける時、最も嬉しいのは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q14" value="impact" id="q14a">
+                    <label for="q14a">「素晴らしい取り組みですね」という称賛</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q14" value="admin" id="q14b">
+                    <label for="q14b">「安心して任せられますね」という信頼</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q14" value="root" id="q14c">
+                    <label for="q14c">「人生が変わりました」という感謝</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            <div class="question-text">15. あなたが最も恐れることは？</div>
+            <div class="options">
+                <div class="option">
+                    <input type="radio" name="q15" value="impact" id="q15a">
+                    <label for="q15a">注目されなくなって忘れられること</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q15" value="admin" id="q15b">
+                    <label for="q15b">制度変更で活動が継続できなくなること</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q15" value="root" id="q15c">
+                    <label for="q15c">参加者や地域の人を裏切ってしまうこと</label>
+                </div>
+            </div>
+        </div>
+
+        <button class="calculate-btn" onclick="calculateResult()">診断結果を見る</button>
+
+        <div id="result" class="result">
+            <div class="result-icon" id="resultIcon"></div>
+            <div class="result-title" id="resultTitle"></div>
+            <div class="result-description" id="resultDescription"></div>
+            <div class="result-details" id="resultDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            const types = {
+                impact: {
+                    icon: "🚀",
+                    name: "インパクト創出志向タイプ",
+                    description: "短期間で大きな成果を生み出し、多くの人に影響を与えることを重視するタイプです。",
+                    strengths: "・短期間で大きなインパクトを創出できる\n・資金調達力が高い\n・メディア露出や発信力がある\n・全国展開などのスケールアップが得意",
+                    challenges: "・持続可能性への配慮が必要\n・地域との深い関係構築に時間をかける\n・長期的な成果の検証を重視する\n・本質的価値を見失わないよう注意する",
+                    advice: "あなたの行動力と発信力は地域に新しい風を吹き込む大きな力です。その力を活かしながら、持続可能性も意識することで、さらに価値のある活動になるでしょう。"
+                },
+                admin: {
+                    icon: "🏛️",
+                    name: "行政連携志向タイプ",
+                    description: "安定性と公平性を重視し、行政との連携で長期的な仕組み作りを目指すタイプです。",
+                    strengths: "・安定した継続性がある\n・公平で透明性の高い運営ができる\n・制度化により社会インフラとして定着\n・幅広い層にアクセス機会を提供",
+                    challenges: "・柔軟性を意識的に取り入れる\n・参加者の主体性を育む工夫をする\n・政策変更への対応策を準備する\n・革新的な取り組みにも挑戦する",
+                    advice: "あなたの堅実さと継続性は地域の基盤づくりに不可欠です。その安定性を土台に、時には新しい挑戦も取り入れることで、より豊かな活動になるでしょう。"
+                },
+                root: {
+                    icon: "🌳",
+                    name: "根付く支援志向タイプ",
+                    description: "地域との深い信頼関係を築き、長期的な視点で持続可能な価値創造を目指すタイプです。",
+                    strengths: "・持続可能性が非常に高い\n・参加者との深い信頼関係がある\n・地域ニーズへの柔軟な対応ができる\n・人材循環による自然な継承が可能",
+                    challenges: "・成果の可視化に工夫する\n・適度な情報発信を心がける\n・ネットワークを少しずつ広げる\n・規模拡大の機会も検討する",
+                    advice: "あなたの地域への愛情と継続力は、本当の意味で地域を変える力です。その深さを大切にしながら、時には外への発信も心がけることで、さらに多くの人に価値を届けられるでしょう。"
+                }
+            };
+
+            let scores = { impact: 0, admin: 0, root: 0 };
+
+            // 15問すべての回答を取得
+            for (let i = 1; i <= 15; i++) {
+                const radios = document.getElementsByName('q' + i);
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        scores[radio.value]++;
+                        break;
+                    }
+                }
+            }
+
+            // 最高スコアを見つける
+            let maxScore = 0;
+            let resultType = 'root';
+            
+            for (let type in scores) {
+                if (scores[type] > maxScore) {
+                    maxScore = scores[type];
+                    resultType = type;
+                }
+            }
+
+            // 結果を表示
+            const selectedType = types[resultType];
+            
+            document.getElementById('resultIcon').textContent = selectedType.icon;
+            document.getElementById('resultTitle').textContent = selectedType.name;
+            document.getElementById('resultDescription').textContent = selectedType.description;
+            
+            let detailsHTML = `
+                <div class="result-section">
+                    <h4>🌟 あなたの強み</h4>
+                    <p>${selectedType.strengths.replace(/\n/g, '<br>')}</p>
+                </div>
+                <div class="result-section">
+                    <h4>💡 さらに成長するために</h4>
+                    <p>${selectedType.challenges.replace(/\n/g, '<br>')}</p>
+                </div>
+                <div class="result-section">
+                    <h4>✨ あなたへのメッセージ</h4>
+                    <p>${selectedType.advice}</p>
+                </div>
+
+<div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
+    <p style="font-size: 14px; text-align: center;">
+        この診断は「本物の地域創生を考える」ブログシリーズと連動しています。<br>
+        <strong>どのタイプも地域にとって必要な存在です。</strong><br>
+        大切なのは、自分の特徴を理解して、より良い活動につなげることです。
+    </p>
+    <div style="margin-top: 15px; text-align: center;">
+        <a href="https://note.com/sanyou34/n/n2bdca2911c23" 
+           target="_blank" 
+           style="display: inline-block; background: rgba(255,255,255,0.9); color: #2c3e50; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 14px; transition: all 0.3s ease;"
+           onmouseover="this.style.background='white'; this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='rgba(255,255,255,0.9)'; this.style.transform='translateY(0)'">
+            📖 ブログを読む：「なぜ全国的に有名じゃないの？」と言われた日<br>
+            ～本物の地域創生を考える Vol.1～
+        </a>
+    </div>
+    <div style="margin-top: 10px; text-align: center;">
+        <p style="font-size: 12px; margin: 5px 0 0 0;">
+            一般社団法人ミライゴト｜角田千鶴
+        </p>
+    </div>
+       `;
+            
+            document.getElementById('resultDetails').innerHTML = detailsHTML;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
